@@ -16,7 +16,7 @@ module.exports = function (client, options) {
     if (timeout) { clearTimeout(timeout) }
     timeout = setTimeout(() => {
       client.emit('error', new Error(`client timed out after ${checkTimeoutInterval} milliseconds`))
-      client.end(`client timed out after ${checkTimeoutInterval} milliseconds`)
+      client.end('keepAliveError')
     }, checkTimeoutInterval)
     client.write('keep_alive', {
       keepAliveId: packet.keepAliveId
